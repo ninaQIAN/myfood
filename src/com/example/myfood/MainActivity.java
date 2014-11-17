@@ -189,7 +189,7 @@ public class MainActivity extends Activity {
 
 				});
 
-		bindarticle();
+		//bindarticle();
 	}
 
 	public String localhost() {

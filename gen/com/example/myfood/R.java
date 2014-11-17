@@ -53,20 +53,20 @@ public final class R {
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class ding {
-        public static final int button1=0x7f180003;
-        public static final int button2=0x7f180005;
-        public static final int imageView1=0x7f180000;
-        public static final int textView1=0x7f180001;
-        public static final int textView2=0x7f180002;
-        public static final int textView3=0x7f180004;
+        public static final int button1=0x7f190003;
+        public static final int button2=0x7f190005;
+        public static final int imageView1=0x7f190000;
+        public static final int textView1=0x7f190001;
+        public static final int textView2=0x7f190002;
+        public static final int textView3=0x7f190004;
     }
     public static final class dinglike {
         public static final int listView1=0x7f0e0000;
     }
     public static final class diqu {
-        public static final int imageView1=0x7f1c0002;
-        public static final int tv1=0x7f1c0000;
-        public static final int tv2=0x7f1c0001;
+        public static final int imageView1=0x7f1d0002;
+        public static final int tv1=0x7f1d0000;
+        public static final int tv2=0x7f1d0001;
     }
     public static final class dmanager {
         public static final int listView1=0x7f0f0000;
@@ -148,24 +148,24 @@ public final class R {
         public static final int xunfeiimageButton1=0x7f0a0012;
     }
     public static final class item_dinglike {
-        public static final int textView1=0x7f190000;
-        public static final int textView2=0x7f190001;
-    }
-    public static final class item_dmanager {
         public static final int textView1=0x7f1a0000;
         public static final int textView2=0x7f1a0001;
-        public static final int textView3=0x7f1a0002;
-        public static final int textView4=0x7f1a0003;
     }
-    public static final class item_dmanager_view {
+    public static final class item_dmanager {
         public static final int textView1=0x7f1b0000;
         public static final int textView2=0x7f1b0001;
         public static final int textView3=0x7f1b0002;
         public static final int textView4=0x7f1b0003;
-        public static final int textView5=0x7f1b0004;
-        public static final int textView6=0x7f1b0005;
-        public static final int textView7=0x7f1b0006;
-        public static final int textView8=0x7f1b0007;
+    }
+    public static final class item_dmanager_view {
+        public static final int textView1=0x7f1c0000;
+        public static final int textView2=0x7f1c0001;
+        public static final int textView3=0x7f1c0002;
+        public static final int textView4=0x7f1c0003;
+        public static final int textView5=0x7f1c0004;
+        public static final int textView6=0x7f1c0005;
+        public static final int textView7=0x7f1c0006;
+        public static final int textView8=0x7f1c0007;
     }
     public static final class jindian {
         public static final int button1=0x7f110002;
@@ -195,45 +195,46 @@ public final class R {
         public static final int activity_system=0x7f030011;
         public static final int activity_usercenter=0x7f030012;
         public static final int activity_usermemo=0x7f030013;
-        public static final int alertdialog_dq=0x7f030014;
-        public static final int head=0x7f030015;
-        public static final int item_article=0x7f030016;
-        public static final int item_diancai=0x7f030017;
-        public static final int item_ding=0x7f030018;
-        public static final int item_dinglike=0x7f030019;
-        public static final int item_dmanager=0x7f03001a;
-        public static final int item_dmanager_view=0x7f03001b;
-        public static final int item_lianxiren=0x7f03001c;
-        public static final int item_new=0x7f03001d;
-        public static final int list_page_load=0x7f03001e;
-        public static final int loading=0x7f03001f;
-        public static final int mainbar=0x7f030020;
-        public static final int networkerror=0x7f030021;
-        public static final int progress=0x7f030022;
-        public static final int searchdialog=0x7f030023;
-        public static final int systemmodify=0x7f030024;
-        public static final int title=0x7f030025;
+        public static final int activity_zhuce=0x7f030014;
+        public static final int alertdialog_dq=0x7f030015;
+        public static final int head=0x7f030016;
+        public static final int item_article=0x7f030017;
+        public static final int item_diancai=0x7f030018;
+        public static final int item_ding=0x7f030019;
+        public static final int item_dinglike=0x7f03001a;
+        public static final int item_dmanager=0x7f03001b;
+        public static final int item_dmanager_view=0x7f03001c;
+        public static final int item_lianxiren=0x7f03001d;
+        public static final int item_new=0x7f03001e;
+        public static final int list_page_load=0x7f03001f;
+        public static final int loading=0x7f030020;
+        public static final int mainbar=0x7f030021;
+        public static final int networkerror=0x7f030022;
+        public static final int progress=0x7f030023;
+        public static final int searchdialog=0x7f030024;
+        public static final int systemmodify=0x7f030025;
+        public static final int title=0x7f030026;
     }
     public static final class lxr {
         public static final int listView1=0x7f120000;
         public static final int textView1=0x7f120001;
     }
     public static final class main_list {
-        public static final int article_textView1=0x7f170001;
-        public static final int article_textView2=0x7f170004;
-        public static final int article_textView3=0x7f170002;
-        public static final int dcbutton1=0x7f170008;
-        public static final int dcimageView1=0x7f170005;
-        public static final int dctextView1=0x7f170006;
-        public static final int dctextView2=0x7f170007;
-        public static final int imageView1=0x7f170000;
-        public static final int imageView2=0x7f170003;
+        public static final int article_textView1=0x7f180001;
+        public static final int article_textView2=0x7f180004;
+        public static final int article_textView3=0x7f180002;
+        public static final int dcbutton1=0x7f180008;
+        public static final int dcimageView1=0x7f180005;
+        public static final int dctextView1=0x7f180006;
+        public static final int dctextView2=0x7f180007;
+        public static final int imageView1=0x7f180000;
+        public static final int imageView2=0x7f180003;
     }
     public static final class mainbar {
-        public static final int imageButton1=0x7f1d0002;
-        public static final int imageButton2=0x7f1d0003;
-        public static final int imageView1=0x7f1d0000;
-        public static final int textView1=0x7f1d0001;
+        public static final int imageButton1=0x7f1e0002;
+        public static final int imageButton2=0x7f1e0003;
+        public static final int imageView1=0x7f1e0000;
+        public static final int textView1=0x7f1e0001;
     }
     public static final class map {
         public static final int button1=0x7f130000;
@@ -260,20 +261,21 @@ public final class R {
         public static final int usermemo=0x7f090012;
     }
     public static final class networkerror {
-        public static final int imageButton1=0x7f1e0000;
-        public static final int textView1=0x7f1e0001;
+        public static final int imageButton1=0x7f1f0000;
+        public static final int textView1=0x7f1f0001;
     }
     public static final class register {
         public static final int button1=0x7f140004;
         public static final int button2=0x7f140005;
+        public static final int button3=0x7f140006;
         public static final int editText1=0x7f140001;
         public static final int editText2=0x7f140003;
         public static final int textView1=0x7f140000;
         public static final int textView2=0x7f140002;
     }
     public static final class searchdialog {
-        public static final int editText1=0x7f1f0001;
-        public static final int imageButton1=0x7f1f0000;
+        public static final int editText1=0x7f200001;
+        public static final int imageButton1=0x7f200000;
     }
     public static final class string {
         public static final int about=0x7f070015;
@@ -389,5 +391,16 @@ public final class R {
         public static final int imageView1=0x7f160000;
         public static final int textView1=0x7f160001;
         public static final int textView2=0x7f160002;
+    }
+    public static final class zhuce {
+        public static final int button1=0x7f170008;
+        public static final int editText1=0x7f170001;
+        public static final int editText2=0x7f170003;
+        public static final int editText3=0x7f170005;
+        public static final int editText4=0x7f170007;
+        public static final int textView1=0x7f170000;
+        public static final int textView2=0x7f170002;
+        public static final int textView3=0x7f170004;
+        public static final int textView4=0x7f170006;
     }
 }
