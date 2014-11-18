@@ -139,7 +139,7 @@ public class RegisterActivity extends Activity {
 		}
 		Toast.makeText(RegisterActivity.this, Integer.toString(result),
 				Toast.LENGTH_SHORT).show();
-
+		
 		
 	}
 
