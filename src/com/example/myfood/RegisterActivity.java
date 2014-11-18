@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.utils.DBhelper;
 import com.example.utils.UsersDBManager;
 import com.example.utils.myapplication;
 
@@ -31,7 +32,7 @@ public class RegisterActivity extends Activity {
 	private Button Button1;
 	private Button Button2;
 	private Button Button3;
-	private int result;
+	//private int result;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,6 @@ public class RegisterActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				login();
-
 			}
 		});
 		
@@ -86,17 +86,24 @@ public class RegisterActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				boolean isValid = validate();
-				if(isValid){
-					Toast.makeText(RegisterActivity.this,
-							"Register Success", Toast.LENGTH_SHORT).show();
-					UsersDBManager1.login(EditText1.getText().toString());
-					finish();
+				String userName = EditText1.getText().toString();
+				String password1 = EditText2.getText().toString();
+				String password2 = EditText3.getText().toString();
+				String email = EditText4.getText().toString();
+				boolean isValid = validate(password1, password2, email);
+				
+				if (isValid) {
+					int res = registration(userName, password1, email);
+					if (res == 1) {
+						Toast.makeText(RegisterActivity.this,
+								"Register Success", Toast.LENGTH_SHORT).show();
+						UsersDBManager1.login(EditText1.getText().toString());
+						finish();
+					} else {
+						Toast.makeText(RegisterActivity.this,
+								"Please try again...", Toast.LENGTH_SHORT).show();
+					}
 					
-				}
-				else{
-					Toast.makeText(RegisterActivity.this,
-							"Register Failed", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
@@ -104,10 +111,45 @@ public class RegisterActivity extends Activity {
 		});
 	}
 	
+	private int registration(String userName, String password, String email) {
+		String message = "";
+		int res = -1;
+		String URL = DBhelper.localHostIp + "servlet/RegisterServlet?loginId="
+					 + userName + "&password="
+					 + password + "&email="
+					 + email + "&gender=M";
+		final HttpClient Client = new DefaultHttpClient();
+		String SetServerString = "";
+		HttpGet httpget = new HttpGet(URL);
+		ResponseHandler<String> responseHandler = new BasicResponseHandler();
+		try {
+			SetServerString = Client.execute(httpget, responseHandler);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(SetServerString.equals("1")){
+			message = "Register Successful!";
+			res = 1;
+		}
+		else if(SetServerString.equals("2"))
+			message = "Email already Exits...";
+		else if(SetServerString.equals("3"))
+			message = "Username already Exits...";
+		Toast.makeText(RegisterActivity.this,
+				message, Toast.LENGTH_SHORT).show();
+		
+		return res;
+		
+	}
 	
 	public void login() {
+		int result = 0;
 		final HttpClient Client = new DefaultHttpClient();
-		String URL = "http://172.31.121.81:8080/Order_Test/servlet/LoginServlet?loginid="
+		String URL = DBhelper.localHostIp + "servlet/LoginServlet?loginid="
 				+ EditText1.getText().toString()
 				+ "&password="
 				+ EditText2.getText().toString();
@@ -150,11 +192,9 @@ public class RegisterActivity extends Activity {
 		finish();
 	}
 	
-	public boolean validate() {
+	public boolean validate(String password1, String password2, String email) {
 		String message = new String();
-		String password1 = EditText2.getText().toString();
-		String password2 = EditText3.getText().toString();
-		String email = EditText4.getText().toString();
+
 		if(!password1.equals(password2)){
 			message = "The two entered passwords do not match, please try again to enter!";
 			Toast.makeText(RegisterActivity.this, message.toString(), Toast.LENGTH_SHORT).show();
@@ -193,80 +233,5 @@ public class RegisterActivity extends Activity {
 		return true;
 	}
 
-//	private int doLogin(final String userName, final String userPwd) {
-//			final String res = null;
-//		
-//            Toast.makeText(getBaseContext(),
-//                    "Please wait, connecting to server.",
-//                    Toast.LENGTH_SHORT).show();
-//
-//
-//            // Create Inner Thread Class
-//            Thread background = new Thread(new Runnable() {
-//                 
-//                private final HttpClient Client = new DefaultHttpClient();
-//                private String URL = "http://172.31.121.81:8080/Order_Test/servlet/LoginServlet?loginid=" + userName + "&password=" + userPwd;
-//                 
-//                // After call for background.start this run method call
-//                public void run() {
-//                    try {
-//
-//                        String SetServerString = "";
-//                        HttpGet httpget = new HttpGet(URL);
-//                        ResponseHandler<String> responseHandler = new BasicResponseHandler();
-//                        SetServerString = Client.execute(httpget, responseHandler);
-//                        threadMsg(SetServerString);
-//
-//                    } catch (Throwable t) {
-//                        // just end the background thread
-//                        Log.i("Animation", "Thread  exception " + t);
-//                    }
-//                }
-//
-//                private void threadMsg(String msg) {
-//
-//                    if (!msg.equals(null) && !msg.equals("")) {
-//                        Message msgObj = handler.obtainMessage();
-//                        Bundle b = new Bundle();
-//                        b.putString("message", msg);
-//                        msgObj.setData(b);
-//                        handler.sendMessage(msgObj);
-//                    }
-//                }
-//
-//                // Define the Handler that receives messages from the thread and update the progress
-//                private final Handler handler = new Handler() {
-//
-//                    public void handleMessage(Message msg) {
-//                         
-//                        String aResponse = msg.getData().getString("message");
-//                        res = aResponse;
-//                        if ((null != aResponse)) {
-//
-//                        	
-//                            // ALERT MESSAGE
-//                            Toast.makeText(
-//                                    getBaseContext(),
-//                                    "Server Response: "+aResponse,
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                        else
-//                        {
-//
-//                                // ALERT MESSAGE
-//                                Toast.makeText(
-//                                        getBaseContext(),
-//                                        "Not Got Response From Server.",
-//                                        Toast.LENGTH_SHORT).show();
-//                        }    
-//
-//                    }
-//                };
-//
-//            });
-//            
-//            // Start Thread
-//            background.start();  //After call start method thread called run Method
-//	}
 
 }
