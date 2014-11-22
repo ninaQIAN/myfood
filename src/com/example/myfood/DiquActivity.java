@@ -305,21 +305,24 @@ public class DiquActivity extends Activity {
 	 */
 	private void binddq() {
 		try {
-			dqcategory = jsoncategory
-					.getjsonlastcategory(
-
-					myapplication1.getlocalhost()
-							+ "/android/json_category/list.aspx?channel_id=2&call_index=dq&page="
-							+ page);
-
 			dqlist = new ArrayList<HashMap<String, Object>>();
-
-			for (category dqcategorys : dqcategory) {
-				HashMap<String, Object> item = new HashMap<String, Object>();
-				item.put("id", dqcategorys.get_id());
-				item.put("title", dqcategorys.get_title());
-				dqlist.add(item);
-			}
+			
+			HashMap<String, Object> item = new HashMap<String, Object>();
+			item.put("id", "1");
+			item.put("title", "college ave");
+			dqlist.add(item);
+			item = new HashMap<String, Object>();
+			item.put("id", "2");
+			item.put("title", "busch");
+			dqlist.add(item);
+			item = new HashMap<String, Object>();
+			item.put("id", "3");
+			item.put("title", "cook/doglass");
+			dqlist.add(item);
+			item = new HashMap<String, Object>();
+			item.put("id", "4");
+			item.put("title", "livingston");
+			dqlist.add(item);
 			dqadapter = new SimpleAdapter(DiquActivity.this, dqlist,
 					R.layout.alertdialog_dq, new String[] { "title", "id" },
 					new int[] { R.id.alertdialog_dq_textView1,
