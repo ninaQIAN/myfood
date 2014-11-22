@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,6 +43,7 @@ import com.example.control.MyListView.OnRefreshListener;
 import com.example.jsonservices.jsoncategory;
 import com.example.method.mymethod;
 import com.example.model.category;
+import com.example.utils.DBhelper;
 import com.example.utils.myapplication;
 
 public class DiquActivity extends Activity {
@@ -109,13 +111,11 @@ public class DiquActivity extends Activity {
 												// stub
 
 												try {
+													String test = "URL area_id=" + dqlist.get(which).get("id");
+													Log.v("JSON", test);
 													myapplication1
-															.setcategoryurl("/android/json_category/list.aspx?channel_id=2&parent_id="
-																	+ dqlist.get(
-																			which)
-																			.get("id")
-																			.toString()
-																	+ "&page=");
+															.setcategoryurl("servlet/JsonAction?action_flag=Category&area_id="
+																	+ dqlist.get(which).get("id"));
 													Intent Intent1 = new Intent();
 													Intent1.setClass(
 															DiquActivity.this,
@@ -309,19 +309,19 @@ public class DiquActivity extends Activity {
 			
 			HashMap<String, Object> item = new HashMap<String, Object>();
 			item.put("id", "1");
-			item.put("title", "college ave");
+			item.put("title", "College Ave");
 			dqlist.add(item);
 			item = new HashMap<String, Object>();
 			item.put("id", "2");
-			item.put("title", "busch");
+			item.put("title", "Busch");
 			dqlist.add(item);
 			item = new HashMap<String, Object>();
 			item.put("id", "3");
-			item.put("title", "cook/doglass");
+			item.put("title", "Livingston");
 			dqlist.add(item);
 			item = new HashMap<String, Object>();
 			item.put("id", "4");
-			item.put("title", "livingston");
+			item.put("title", "Cook/Douglass");
 			dqlist.add(item);
 			dqadapter = new SimpleAdapter(DiquActivity.this, dqlist,
 					R.layout.alertdialog_dq, new String[] { "title", "id" },
@@ -456,48 +456,65 @@ public class DiquActivity extends Activity {
 	 * 加载json数据
 	 */
 	@SuppressLint("NewApi")
-	public List<category> loaddata(int page) throws IOException {
-		List<category> list = new ArrayList<category>();
+	
+	public List<category> loaddata(int page) {
 
-		FileInputStream fis = openFileInput("tours");
-		BufferedInputStream bis = new BufferedInputStream(fis);
-		StringBuffer b = new StringBuffer();
-		while (bis.available() != 0) {
-			char c = (char) bis.read();
-			b.append(c);
-		}
-		bis.close();
-		fis.close();
+//		String temp_url = "http://172.31.104.28:8080/JsonProject/servlet/JsonAction?action_flag=Category";
+		String temp_url = "http://172.31.104.28:8080/JsonProject/" + myapplication1.getcategoryurl();
+		
+//		String temp_url = "http://172.31.104.28:8080/JsonProject/" + "servlet/JsonAction?action_flag=Category&area_id=2";
 		try {
-			JSONArray jsonarray = new JSONArray(b.toString());
-			for (int i = 0; i < jsonarray.length(); i++) {
-				JSONObject jsonobject = jsonarray.getJSONObject(i);
-				int id = jsonobject.getInt("id");
-				int channel_id = jsonobject.getInt("channel_id");
-				String title = jsonobject.getString("title");
-				String call_index = jsonobject.getString("call_index");
-				int parent_id = jsonobject.getInt("parent_id");
-				String class_list = jsonobject.getString("class_list");
-				int class_layer = jsonobject.getInt("class_layer");
-				int sort_id = jsonobject.getInt("sort_id");
-				String link_url = jsonobject.getString("link_url");
-				String img_url = jsonobject.getString("img_url");
-				String content = jsonobject.getString("content");
-				String seo_title = jsonobject.getString("seo_title");
-				String seo_keywords = jsonobject.getString("seo_keywords");
-				String seo_description = jsonobject
-						.getString("seo_description");
-				list.add(new category(id, channel_id, title, call_index,
-						parent_id, class_list, class_layer, sort_id, link_url,
-						img_url, content, seo_title, seo_keywords,
-						seo_description));
-			}
-			return list;
+//			Categorys = jsoncategory.getjsonlastcategory(temp_url);
+			Categorys = jsoncategory.getJsonCategory(temp_url);
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			return list;
 		}
+		return Categorys;
 	}
+	
+//	public List<category> loaddata(int page) throws IOException {
+//		List<category> list = new ArrayList<category>();
+//
+//		FileInputStream fis = openFileInput("tours");
+//		BufferedInputStream bis = new BufferedInputStream(fis);
+//		StringBuffer b = new StringBuffer();
+//		while (bis.available() != 0) {
+//			char c = (char) bis.read();
+//			b.append(c);
+//		}
+//		bis.close();
+//		fis.close();
+//		try {
+//			JSONArray jsonarray = new JSONArray(b.toString());
+//			for (int i = 0; i < jsonarray.length(); i++) {
+//				JSONObject jsonobject = jsonarray.getJSONObject(i);
+//				int id = jsonobject.getInt("id");
+//				int channel_id = jsonobject.getInt("channel_id");
+//				String title = jsonobject.getString("title");
+//				String call_index = jsonobject.getString("call_index");
+//				int parent_id = jsonobject.getInt("parent_id");
+//				String class_list = jsonobject.getString("class_list");
+//				int class_layer = jsonobject.getInt("class_layer");
+//				int sort_id = jsonobject.getInt("sort_id");
+//				String link_url = jsonobject.getString("link_url");
+//				String img_url = jsonobject.getString("img_url");
+//				String content = jsonobject.getString("content");
+//				String seo_title = jsonobject.getString("seo_title");
+//				String seo_keywords = jsonobject.getString("seo_keywords");
+//				String seo_description = jsonobject
+//						.getString("seo_description");
+//				list.add(new category(id, channel_id, title, call_index,
+//						parent_id, class_list, class_layer, sort_id, link_url,
+//						img_url, content, seo_title, seo_keywords,
+//						seo_description));
+//			}
+//			return list;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return list;
+//		}
+//	}
 
 	/**
 	 * 打电话

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBhelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME_STRING = "datastorage";
 	private static final int DATABASE_VERSION = 1;
-	public static final String localHostIp = "http://172.31.97.56:8080/Order_Test/";
+	public static final String localHostIp = "http://172.31.104.28:8080/Order_Test/";
 
 	public DBhelper(Context context) {
 		super(context, DATABASE_NAME_STRING, null, DATABASE_VERSION);

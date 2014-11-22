@@ -29,7 +29,7 @@ public class CantingActivity extends Activity {
 	private ImageView ImageView1; // 图像
 	private TextView TextView1; // 店名
 	private TextView TextView2; // 地址
-	private Button Button1; // 预订餐厅
+	//private Button Button1; // 预订餐厅
 	private Button Button2; // 餐厅简介
 	private Button Button3; // 经典菜品
 	private Button Button4; // 地图位置
@@ -46,7 +46,7 @@ public class CantingActivity extends Activity {
 		ImageView1 = (ImageView) findViewById(R.id.imageView1);
 		TextView1 = (TextView) findViewById(R.id.textView1);
 		TextView2 = (TextView) findViewById(R.id.textView2);
-		Button1 = (Button) findViewById(R.id.button1);
+		//Button1 = (Button) findViewById(R.id.button1);
 		Button2 = (Button) findViewById(R.id.button2);
 		Button3 = (Button) findViewById(R.id.button3);
 		Button4 = (Button) findViewById(R.id.button4);
@@ -67,22 +67,22 @@ public class CantingActivity extends Activity {
 			e.printStackTrace();
 
 		}
-
-		Button1.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent Intent1 = new Intent();
-				Intent1.setClass(CantingActivity.this, DiancaiActivity.class);
-				Bundle Bundle1 = new Bundle();
-				Bundle1.putString("tg", "1");
-				Intent1.putExtras(Bundle1);
-				startActivity(Intent1);
-				overridePendingTransition(R.anim.in_from_right,
-						R.anim.out_to_left);
-			}
-		});
+//
+//		Button1.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				Intent Intent1 = new Intent();
+//				Intent1.setClass(CantingActivity.this, DiancaiActivity.class);
+//				Bundle Bundle1 = new Bundle();
+//				Bundle1.putString("tg", "1");
+//				Intent1.putExtras(Bundle1);
+//				startActivity(Intent1);
+//				overridePendingTransition(R.anim.in_from_right,
+//						R.anim.out_to_left);
+//			}
+//		});
 
 		/***
 		 * 餐厅简介
