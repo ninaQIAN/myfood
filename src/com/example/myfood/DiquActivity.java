@@ -1,9 +1,18 @@
 package com.example.myfood;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -71,6 +80,10 @@ public class DiquActivity extends Activity {
 			tabhost.addTab(tabhost.newTabSpec("tab2").setIndicator("地图模式")
 					.setContent(R.id.tab2));
 			listview1 = (MyListView) findViewById(R.id.listview1);
+			
+			/* create json */
+			create_json();
+			
 			threadstart();
 			binddq();
 			tabhost.getTabWidget().getChildAt(0)
@@ -439,16 +452,48 @@ public class DiquActivity extends Activity {
 	/***
 	 * 加载json数据
 	 */
-	public List<category> loaddata(int page) {
+	@SuppressLint("NewApi")
+	public List<category> loaddata(int page) throws IOException {
+		List<category> list = new ArrayList<category>();
 
+		FileInputStream fis = openFileInput("tours");
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		StringBuffer b = new StringBuffer();
+		while (bis.available() != 0) {
+			char c = (char) bis.read();
+			b.append(c);
+		}
+		bis.close();
+		fis.close();
 		try {
-			Categorys = jsoncategory.getjsonlastcategory(myapplication1
-					.getlocalhost() + myapplication1.getcategoryurl() + page);
-
+			JSONArray jsonarray = new JSONArray(b.toString());
+			for (int i = 0; i < jsonarray.length(); i++) {
+				JSONObject jsonobject = jsonarray.getJSONObject(i);
+				int id = jsonobject.getInt("id");
+				int channel_id = jsonobject.getInt("channel_id");
+				String title = jsonobject.getString("title");
+				String call_index = jsonobject.getString("call_index");
+				int parent_id = jsonobject.getInt("parent_id");
+				String class_list = jsonobject.getString("class_list");
+				int class_layer = jsonobject.getInt("class_layer");
+				int sort_id = jsonobject.getInt("sort_id");
+				String link_url = jsonobject.getString("link_url");
+				String img_url = jsonobject.getString("img_url");
+				String content = jsonobject.getString("content");
+				String seo_title = jsonobject.getString("seo_title");
+				String seo_keywords = jsonobject.getString("seo_keywords");
+				String seo_description = jsonobject
+						.getString("seo_description");
+				list.add(new category(id, channel_id, title, call_index,
+						parent_id, class_list, class_layer, sort_id, link_url,
+						img_url, content, seo_title, seo_keywords,
+						seo_description));
+			}
+			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return list;
 		}
-		return Categorys;
 	}
 
 	/**
@@ -490,6 +535,64 @@ public class DiquActivity extends Activity {
 		}
 		return super.onKeyDown(keyCode, event);
 
+	}
+	
+	/* create a experimental json file */
+	public void create_json() throws JSONException, IOException {
+		JSONArray data = new JSONArray();
+		JSONObject tour;
+		
+//		tour = new JSONObject();
+//		tour.put("_id", 100);
+//		tour.put("_title", "la");
+//		tour.put(name, value)
+//		data.put(tour);
+//		
+//		tour = new JSONObject();
+//		tour.put("_id", 101);
+//		tour.put("_title", "wa");
+//		data.put(tour);
+		
+		tour = new JSONObject();
+		tour.put("id", 1);
+		tour.put("channel_id", 1);
+		tour.put("title", "1");
+		tour.put("call_index", "1");
+		tour.put("parent_id", 1);
+		tour.put("class_list", "1");
+		tour.put("class_layer", 1);
+		tour.put("sort_id", 1);
+		tour.put("link_url", "1");
+		tour.put("img_url", "1");
+		tour.put("content", "1");
+		tour.put("seo_title", "1");
+		tour.put("seo_keywords", "1");
+		tour.put("seo_description", "1");
+		data.put(tour);
+		
+		
+		tour = new JSONObject();
+		tour.put("id", 2);
+		tour.put("channel_id", 2);
+		tour.put("title", "2");
+		tour.put("call_index", "2");
+		tour.put("parent_id", 2);
+		tour.put("class_list", "2");
+		tour.put("class_layer", 2);
+		tour.put("sort_id", 2);
+		tour.put("link_url", "2");
+		tour.put("img_url", "2");
+		tour.put("content", "2");
+		tour.put("seo_title", "2");
+		tour.put("seo_keywords", "2");
+		tour.put("seo_description", "2");
+		data.put(tour);
+		
+		String text = data.toString();
+		
+		FileOutputStream fos = openFileOutput("tours", MODE_PRIVATE);
+		fos.write(text.getBytes());
+		fos.close();	
 	}
 
 }
